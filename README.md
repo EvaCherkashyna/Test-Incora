@@ -59,7 +59,7 @@ yeva.subscriptions.forEach(key => {
   }
 })
 ```
-![](./img/Watch.png)
+![](./img/watch.png)
 
 getRecommendationTrending()
 ```JS
