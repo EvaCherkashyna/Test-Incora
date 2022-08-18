@@ -81,7 +81,7 @@ class StreamingService {
     // console.log(this.viewsByShowName); /* проверка watch() */
   }
   setAddViewsByShowName(name: string): void {
-      this.viewsByShowName.set(name, this.viewsByShowName.get(name) + 1);
+      this.viewsByShowName.set(name, this.viewsByShowName.get(name)! + 1);
     
   }
   addShow(show: Show): void {

@@ -82,7 +82,8 @@ class StreamingService {
     // console.log(this.viewsByShowName); /* проверка watch() */
   }
   set addViewsByShowName(name) {
-    this.viewsByShowName.set(name, this.viewsByShowName.get(name)+1) 
+    this.viewsByShowName[name] += 1;
+    console.log(this.viewsByShowName);
   }
   addShow(show){
     if (!(this.viewsByShowName.has(show.name))){
@@ -286,23 +287,23 @@ yeva.subscribe(amazonPrime)
 // })
 
 // ✅👍 проверка addShow() для проверки откоментировать 65 строку 
-// yeva.subscriptions.forEach(key => {
-//   if (key.streamingService == amazonPrime) {
-//     key.streamingService.addShow(new Movie('Death on the Nile', ['mystery', 'crime', 'thriller', 'drama', 'foreign'], '2022', "200"))//добавить фильм которого нет в amazonPrime (должен добавить)
-//     key.streamingService.addShow(new Movie('Elvis', ['drama', 'biography', 'foreign', 'thriller'], '2022', "145"))// добавить фильм что есть в amazonPrime(не должен добавить)
-//     key.streamingService.addShow(new Series('The New Pope', ['drama', 'foreign'], '2019', "2:00",
-//       [
-//         new Episode('First Episode', ['drama', 'foreign'], '2019', "145"),
-//         new Episode('Second Episode', ['drama', 'foreign'], '2019', "245"),
-//         new Episode('Third Episode', ['drama', 'foreign'], '2019', "245"),
-//         new Episode('Fourth Episode', ['drama', 'foreign'], '2019', "200"),
-//         new Episode('Fifth Episode', ['drama', 'foreign'], '2019', "143"),
-//         new Episode('Sixth Episode', ['drama', 'foreign'], '2019', "345"),
-//         new Episode('Sleeping Murder', ['foreign', 'fantasy', 'thriller'], '2022', "345")
-//       ]))//  добавить сериал в котором есть эпизод другого сериала что есть в amazonPrime (не должен добавить)
-//     key.streamingService.addShow(new Episode('His Last Vow', ['detectives', 'trilleries', 'abroad'], '2009', "145"),)// добавить епизод в amazonPrime(не должен добавить)
-//   }
-// })
+yeva.subscriptions.forEach(key => {
+  if (key.streamingService == amazonPrime) {
+    key.streamingService.addShow(new Movie('Death on the Nile', ['mystery', 'crime', 'thriller', 'drama', 'foreign'], '2022', "200"))//добавить фильм которого нет в amazonPrime (должен добавить)
+    key.streamingService.addShow(new Movie('Elvis', ['drama', 'biography', 'foreign', 'thriller'], '2022', "145"))// добавить фильм что есть в amazonPrime(не должен добавить)
+    key.streamingService.addShow(new Series('The New Pope', ['drama', 'foreign'], '2019', "2:00",
+      [
+        new Episode('First Episode', ['drama', 'foreign'], '2019', "145"),
+        new Episode('Second Episode', ['drama', 'foreign'], '2019', "245"),
+        new Episode('Third Episode', ['drama', 'foreign'], '2019', "245"),
+        new Episode('Fourth Episode', ['drama', 'foreign'], '2019', "200"),
+        new Episode('Fifth Episode', ['drama', 'foreign'], '2019', "143"),
+        new Episode('Sixth Episode', ['drama', 'foreign'], '2019', "345"),
+        new Episode('Sleeping Murder', ['foreign', 'fantasy', 'thriller'], '2022', "345")
+      ]))//  добавить сериал в котором есть эпизод другого сериала что есть в amazonPrime (не должен добавить)
+    key.streamingService.addShow(new Episode('His Last Vow', ['detectives', 'trilleries', 'abroad'], '2009', "145"),)// добавить епизод в amazonPrime(не должен добавить)
+  }
+})
 
 //✅👍 проверка getDuration()
 // yeva.subscriptions.forEach(key => {
