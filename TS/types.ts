@@ -76,8 +76,8 @@ class StreamingService {
         this.viewsByShowName.set(show.name, 0);
       }
     });
-    console.log(this.shows); /* перевірка addShow() */
-    // console.log(this.viewsByShowName); /* перевірка watch() */
+    // console.log(this.shows); /* перевірка addShow() */
+    console.log(this.viewsByShowName); /* перевірка watch() */
   }
   setAddViewsByShowName(name: string): void {
       this.viewsByShowName.set(name, this.viewsByShowName.get(name)! + 1);
@@ -492,14 +492,14 @@ yeva.subscribe(amazonPrime)
 // yeva.subscribe(megogo)//Повторна підписка
 
 //✅👍 перевірка watch() для перевірки відкоментувати 68 рядок
-// yeva.subscriptions.forEach(key => {
-//   if (key.streamingService == amazonPrime) {
-//     key.watch('Free Guy') // фільм що є в amazonPrime (должен спрацювати)
-//     key.watch('Death on the Nile') // фільм якого немає в amazonPrime (не повинен працювати)
-//     key.watch('A Murder Is Announced') // епізод серіалу, який міститься в серіалі, який є в amazon Prime (должен сработать)
-//     key.watch('Fifth Episode') // епізод серіалу, якого немає в серіалах amazon Prime (не повинен працювати)
-//   }
-// })
+yeva.subscriptions.forEach(key => {
+  if (key.streamingService == amazonPrime) {
+    key.watch('Free Guy') // фільм що є в amazonPrime (должен спрацювати)
+    key.watch('Death on the Nile') // фільм якого немає в amazonPrime (не повинен працювати)
+    key.watch('A Murder Is Announced') // епізод серіалу, який міститься в серіалі, який є в amazon Prime (должен сработать)
+    key.watch('Fifth Episode') // епізод серіалу, якого немає в серіалах amazon Prime (не повинен працювати)
+  }
+})
 
 // ✅👍перевірка getRecommendationByGenre()
 // yeva.subscriptions.forEach(key => {
