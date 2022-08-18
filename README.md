@@ -59,8 +59,7 @@ yeva.subscriptions.forEach(key => {
   }
 })
 ```
-
-![](./img/img/watch.png)
+![](./img/watch.png)
 
 getRecommendationTrending()
 ```JS
@@ -85,9 +84,9 @@ yeva.subscriptions.forEach(key => {
 ```
 ![](./img/getRecommendationByGenre.png)
 
+# StreamingService
 
 addShow()
-
 ```JS
 yeva.subscriptions.forEach(key => {
   if (key.streamingService == amazonPrime) {
@@ -110,17 +109,6 @@ yeva.subscriptions.forEach(key => {
 
 ![](./img/addShow.png)
 
-getDuration()
-
-```JS
-yeva.subscriptions.forEach(key => {
-  if (key.streamingService == amazonPrime) {
-    key.streamingService.shows.forEach((show) => console.log(show.getDuration()))
-  }
-})
-```
-![](./img/getDuration.png)
-
 getMostViewedShowsOfYear()
 ```JS
 yeva.subscriptions.forEach(key => {
@@ -142,3 +130,15 @@ yeva.subscriptions.forEach(key => {
 })
 ```
 ![](./img/getMostViewedShowsOfGenre.png)
+
+# Show
+getDuration()
+
+```JS
+yeva.subscriptions.forEach(key => {
+  if (key.streamingService == amazonPrime) {
+    key.streamingService.shows.forEach((show) => console.log(show.getDuration()))
+  }
+})
+```
+![](./img/getDuration.png)
