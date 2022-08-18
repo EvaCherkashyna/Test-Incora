@@ -30,6 +30,7 @@ var User = /** @class */ (function () {
         else {
             console.log("You are already subscribed to ".concat(streamingService.name));
         }
+        // console.log(this.subscriptions); //перевірка subscriptions
     };
     return User;
 }());
@@ -82,11 +83,12 @@ var StreamingService = /** @class */ (function () {
                 _this.viewsByShowName.set(show.name, 0);
             }
         });
-        // console.log(this.shows); /* перевірка addShow() */
-        console.log(this.viewsByShowName); /* перевірка watch() */
     }
     StreamingService.prototype.setAddViewsByShowName = function (name) {
-        this.viewsByShowName.set(name, this.viewsByShowName.get(name) + 1);
+        this.viewsByShowName.has(name)
+            ? this.viewsByShowName.set(name, this.viewsByShowName.get(name) + 1)
+            : console.log("Show \"".concat(name, "\" not found"));
+        console.log(this.viewsByShowName); /* перевірка watch() */
     };
     StreamingService.prototype.addShow = function (show) {
         var _this = this;
@@ -94,7 +96,7 @@ var StreamingService = /** @class */ (function () {
             if (show instanceof Series) {
                 if (!show.episodes
                     .map(function (episode) { return episode.name; })
-                    .some(function (episode) { return _this.viewsByShowName.has(episode); })) {
+                    .some(function (name) { return _this.viewsByShowName.has(name); })) {
                     this.shows.push(show);
                 }
                 else {
@@ -111,6 +113,7 @@ var StreamingService = /** @class */ (function () {
         else {
             console.log("".concat(show.name, " already exsist"));
         }
+        console.log(this.shows, 'dklgdfs'); /* перевірка addShow() */
     };
     StreamingService.prototype.getMostViewedShowsOfYear = function (year) {
         var _this = this;
@@ -120,7 +123,6 @@ var StreamingService = /** @class */ (function () {
             return [];
         }
         else {
-            ;
             return mostViewedShowsOfYear
                 .sort(function (a, b) {
                 return _this.viewsByShowName[b.name] - _this.viewsByShowName[a.name];
@@ -269,26 +271,24 @@ var amazonPrime = new StreamingService("Amazon Prime", amazonPrimeShows);
 // let netflix = new StreamingService('Netflix', netflixShows)
 // let megogo = new StreamingService('Megogo', megogoShows)
 var yeva = new User();
-//✅👍перевірка подписок()
+//✅👍перевірка подписок()  для перевірки відкоментувати 19 , 494 , 495 рядок
 yeva.subscribe(amazonPrime);
 // yeva.subscribe(netflix)
 // yeva.subscribe(megogo)
 // yeva.subscribe(megogo)//Повторна підписка
 //✅👍 перевірка watch() для перевірки відкоментувати 68 рядок
-yeva.subscriptions.forEach(function (key) {
-    if (key.streamingService == amazonPrime) {
-        key.watch('Free Guy'); // фільм що є в amazonPrime (должен спрацювати)
-        key.watch('Death on the Nile'); // фільм якого немає в amazonPrime (не повинен працювати)
-        key.watch('A Murder Is Announced'); // епізод серіалу, який міститься в серіалі, який є в amazon Prime (должен сработать)
-        key.watch('Fifth Episode'); // епізод серіалу, якого немає в серіалах amazon Prime (не повинен працювати)
-    }
-});
+// yeva.subscriptions.forEach((key) => {
+//   if (key.streamingService == amazonPrime) {
+//     key.watch("Free Guy"); // фільм що є в amazonPrime (повинен спрацювати)
+//     key.watch("Death on the Nile"); // фільм якого немає в amazonPrime (не повинен працювати)
+//     key.watch("A Murder Is Announced"); // епізод серіалу, який міститься в серіалі, який є в amazon Prime (повинен спрацювати)
+//     key.watch("Fifth Episode"); // епізод серіалу, якого немає в серіалах amazon Prime (не повинен працювати)
+//   }
+// });
 // ✅👍перевірка getRecommendationByGenre()
 // yeva.subscriptions.forEach(key => {
 //   if (key.streamingService == amazonPrime) {
-//     console.log(key.getRecommendationTrending(),'getRecommendationTrending')
-//     console.log(key.getRecommendationByGenre(),'getRecommendationByGenre no value')//no value
-//     console.log(key.getRecommendationByGenre('thriller'),'getRecommendationByGenre thriller')
+//     console.log(key.getRecommendationByGenre('thriller'),'getRecommendationByGenre')
 //   }
 // })
 // ✅👍перевірка getRecommendationTrending()
@@ -298,23 +298,22 @@ yeva.subscriptions.forEach(function (key) {
 //   }
 // })
 // ✅👍 перевірка addShow() для перевірки відкоментувати 67 рядок
-// yeva.subscriptions.forEach(key => {
-//   if (key.streamingService == amazonPrime) {
-//     key.streamingService.addShow(new Movie('Death on the Nile', ['mystery', 'crime', 'thriller', 'drama', 'foreign'], '2022', "200"))//додати фільм, якого немає в amazonPrime (треба додати)
-//     key.streamingService.addShow(new Movie('Elvis', ['drama', 'biography', 'foreign', 'thriller'], '2022', "145"))// додати фільм, що є в amazonPrime(не потрібно додавати)
-//     key.streamingService.addShow(new Series('The New Pope', ['drama', 'foreign'], '2019', "2:00",
-//       [
-//         new Episode('First Episode', ['drama', 'foreign'], '2019', "145"),
-//         new Episode('Second Episode', ['drama', 'foreign'], '2019', "245"),
-//         new Episode('Third Episode', ['drama', 'foreign'], '2019', "245"),
-//         new Episode('Fourth Episode', ['drama', 'foreign'], '2019', "200"),
-//         new Episode('Fifth Episode', ['drama', 'foreign'], '2019', "143"),
-//         new Episode('Sixth Episode', ['drama', 'foreign'], '2019', "345"),
-//         new Episode('Sleeping Murder', ['foreign', 'fantasy', 'thriller'], '2022', "345")
-//       ]))//  додати серіал, в якому є епізод іншого серіалу, що є в amazonPrime (не потрібно додавати)
-//     key.streamingService.addShow(new Episode('His Last Vow', ['detectives', 'trilleries', 'abroad'], '2009', "145"),)// додати епізод в amazon Prime (не повинен додавати)
-//   }
-// })
+yeva.subscriptions.forEach(function (key) {
+    if (key.streamingService == amazonPrime) {
+        key.streamingService.addShow(new Movie('Death on the Nile', ['mystery', 'crime', 'thriller', 'drama', 'foreign'], '2022', "200")); //додати фільм, якого немає в amazonPrime (треба додати)
+        key.streamingService.addShow(new Movie('Elvis', ['drama', 'biography', 'foreign', 'thriller'], '2022', "145")); // додати фільм, що є в amazonPrime(не потрібно додавати)
+        key.streamingService.addShow(new Series('The New Pope', ['drama', 'foreign'], '2019', "2:00", [
+            new Episode('First Episode', ['drama', 'foreign'], '2019', "145"),
+            new Episode('Second Episode', ['drama', 'foreign'], '2019', "245"),
+            new Episode('Third Episode', ['drama', 'foreign'], '2019', "245"),
+            new Episode('Fourth Episode', ['drama', 'foreign'], '2019', "200"),
+            new Episode('Fifth Episode', ['drama', 'foreign'], '2019', "143"),
+            new Episode('Sixth Episode', ['drama', 'foreign'], '2019', "345"),
+            new Episode('Sleeping Murder', ['foreign', 'fantasy', 'thriller'], '2022', "345")
+        ])); //  додати серіал, в якому є епізод іншого серіалу, що є в amazonPrime (не потрібно додавати)
+        // key.streamingService.addShow(new Episode('His Last Vow', ['detectives', 'trilleries', 'abroad'], '2009', "145"))// додати епізод в amazon Prime (не повинен додавати)
+    }
+});
 // //✅👍 перевірка getDuration()
 // yeva.subscriptions.forEach(key => {
 //   if (key.streamingService == amazonPrime) {
@@ -326,12 +325,12 @@ yeva.subscriptions.forEach(function (key) {
 //   if (key.streamingService == amazonPrime) {
 //     console.log(key.streamingService.getMostViewedShowsOfYear("2012"))//нету фільмів з таким роком випуску (не повинен знайти)
 //     console.log(key.streamingService.getMostViewedShowsOfYear("2022"))//є фільми з таким роком випуску (повинен знайти)
-//   } 
+//   }
 // })
 //✅👍перевірка getMostViewedShowsOfGenre
 // yeva.subscriptions.forEach(key => {
 //   if (key.streamingService == amazonPrime) {
 //     console.log(key.streamingService.getMostViewedShowsOfGenre("thriller"))//є фільми з таким роком випуску (повинен знайти)
 //     console.log(key.streamingService.getMostViewedShowsOfGenre("historical drama"))//нету фільмів з таким роком випуску (не повинен знайти)
-//   } 
+//   }
 // })
