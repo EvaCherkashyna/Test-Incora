@@ -3,7 +3,7 @@
 ```JS
  let yeva = new User()
  ```
-
+## subscribe()
 Перевіримо метод subscribe(streamingService)  - він підписує користувача на стрімінговий сервіс. Повертає об’єкт Subscription.
 Для цього нам треба оформити підписку на StreamingService 
 
@@ -48,7 +48,9 @@ yeva.subscribe(megogo)//Повторна підписка
 ![](./img/subscribe.png)
 
 # Subscription
-Watch()
+
+## watch() 
+Переглянути шоу.
 ```JS
 yeva.subscriptions.forEach(key => {
   if (key.streamingService == amazonPrime) {
@@ -61,7 +63,8 @@ yeva.subscriptions.forEach(key => {
 ```
 ![](./img/watch.png)
 
-getRecommendationTrending()
+## getRecommendationTrending()
+Отримати випадкове шоу, яке вийшло цього року. Викликає метод getMostViewedShowsOfYear() стримінгово сервісу та рандомно вибирає елемент масиву.
 ```JS
 yeva.subscriptions.forEach(key => {
   if (key.streamingService == amazonPrime) {
@@ -72,7 +75,8 @@ yeva.subscriptions.forEach(key => {
 
 ![](./img/getRecommendationTrending.png)
 
-getRecommendationByGenre()
+## getRecommendationByGenre()
+Отримати випадкове шоу у певному жанрі. Викликає метод getMostViewedShowsOfGenre() стримінгово сревісу, працює так само, як і getRecommendationTrending().
 ```JS
 yeva.subscriptions.forEach(key => {
   if (key.streamingService == amazonPrime) {
@@ -86,7 +90,8 @@ yeva.subscriptions.forEach(key => {
 
 # StreamingService
 
-addShow()
+## addShow()
+Додає шоу на стрімінговий сервіс.
 ```JS
 yeva.subscriptions.forEach(key => {
   if (key.streamingService == amazonPrime) {
@@ -106,10 +111,10 @@ yeva.subscriptions.forEach(key => {
   }
 })
 ```
-
 ![](./img/addShow.png)
 
-getMostViewedShowsOfYear()
+## getMostViewedShowsOfYear()
+Повертає до десяти найбільш переглянутих шоу, які вийшли в заданому році (менше десяти, якщо загальна кількість шоу менша за 10).
 ```JS
 yeva.subscriptions.forEach(key => {
   if (key.streamingService == amazonPrime) {
@@ -120,7 +125,8 @@ yeva.subscriptions.forEach(key => {
 ```
 ![](./img/getMostViewedShowsOfYear.png)
 
-getMostViewedShowsOfGenre()
+## getMostViewedShowsOfGenre()
+Повертає до десяти найбільш переглянутих шоу, які належать до заданого жарну(менше десяти, якщо загальна кількість шоу менша за 10).
 ```JS
 yeva.subscriptions.forEach(key => {
   if (key.streamingService == amazonPrime) {
@@ -132,8 +138,9 @@ yeva.subscriptions.forEach(key => {
 ![](./img/getMostViewedShowsOfGenre.png)
 
 # Show
-getDuration()
 
+## getDuration()
+Повертає тривалість шоу.
 ```JS
 yeva.subscriptions.forEach(key => {
   if (key.streamingService == amazonPrime) {
