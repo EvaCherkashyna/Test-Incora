@@ -148,7 +148,7 @@ class Episode extends Show {
   }
 }
 
-//---------------------------------------------------------проверка работы кода---------------------------------------------------------
+//---------------------------------------------------------перевірка роботи кода---------------------------------------------------------
 let netflixShows = [
   new Movie('Harry Potter 1', ['fantasy', 'adventure', 'foreign'], '2001', "145"),
   new Movie('Harry Potter 2', ['fantasy', 'adventure', 'detective', 'family', 'foreign'], '2002', "345"),
@@ -240,21 +240,21 @@ let amazonPrime = new StreamingService('Amazon Prime', amazonPrimeShows)
 
 let yeva = new User()
 
-//✅👍перевірка подписок()
+//✅👍перевірка підписок()
 yeva.subscribe(amazonPrime)
 // yeva.subscribe(netflix)
 // yeva.subscribe(megogo)
 // yeva.subscribe(megogo)//Повторна підписка
 
 //✅👍 перевірка watch() для перевірки відкоментувати 68 рядок
-yeva.subscriptions.forEach(key => {
-  if (key.streamingService == amazonPrime) {
-    key.watch('Free Guy') // фільм що є в amazonPrime (должен спрацювати)
-    key.watch('Death on the Nile') // фільм якого немає в amazonPrime (не повинен працювати)
-    key.watch('A Murder Is Announced') // епізод серіалу, який міститься в серіалі, який є в amazon Prime (должен сработать)
-    key.watch('Fifth Episode') // епізод серіалу, якого немає в серіалах amazon Prime (не повинен працювати)
-  }
-})
+// yeva.subscriptions.forEach(key => {
+//   if (key.streamingService == amazonPrime) {
+//     key.watch('Free Guy') // фільм що є в amazonPrime (должен спрацювати)
+//     key.watch('Death on the Nile') // фільм якого немає в amazonPrime (не повинен працювати)
+//     key.watch('A Murder Is Announced') // епізод серіалу, який міститься в серіалі, який є в amazon Prime (должен сработать)
+//     key.watch('Fifth Episode') // епізод серіалу, якого немає в серіалах amazon Prime (не повинен працювати)
+//   }
+// })
 
 // ✅👍перевірка getRecommendationByGenre()
 // yeva.subscriptions.forEach(key => {
