@@ -18,7 +18,6 @@ class User {
     }
     // console.log(this.subscriptions); //перевірка subscriptions
   }
-  
 }
 //---------------------------------------------------------Subscription---------------------------------------------------------
 class Subscription {
@@ -29,7 +28,7 @@ class Subscription {
   }
   watch(showName: string) {
     if (this.streamingService.viewsByShowName.has(showName)) {
-      this.streamingService.setAddViewsByShowName(showName);
+      this.streamingService.addViewsByShowName(showName);
     } else {
       console.log(
         `${showName} are not contained in the ${this.streamingService.name} service`
@@ -79,13 +78,12 @@ class StreamingService {
         this.viewsByShowName.set(show.name, 0);
       }
     });
- 
   }
-  setAddViewsByShowName(name: string): void {
+  addViewsByShowName(name: string): void {
     this.viewsByShowName.has(name)
       ? this.viewsByShowName.set(name, this.viewsByShowName.get(name)! + 1)
       : console.log(`Show "${name}" not found`);
-    console.log(this.viewsByShowName); /* перевірка watch() */
+    // console.log(this.viewsByShowName); /* перевірка watch() */
   }
   addShow(show: Movie | Series): void {
     if (!this.viewsByShowName.has(show.name)) {
@@ -102,15 +100,14 @@ class StreamingService {
       } else if (show instanceof Episode) {
         console.log(
           `You can't add an episode of a series without specifying the series`
-          );
-        } else {
-          this.shows.push(show);
-        }
+        );
       } else {
-        console.log(`${show.name} already exsist`);
+        this.shows.push(show);
       }
-      console.log(this.shows,'dklgdfs'); /* перевірка addShow() */ 
-
+    } else {
+      console.log(`${show.name} already exsist`);
+    }
+    console.log(this.shows, "dklgdfs"); /* перевірка addShow() */
   }
 
   getMostViewedShowsOfYear(year: string): Show[] {
@@ -194,7 +191,7 @@ class Episode extends Show {
   }
 }
 
-//---------------------------------------------------------проверка работы кода---------------------------------------------------------
+//---------------------------------------------------------перевірка роботи кода---------------------------------------------------------
 let netflixShows: (Movie | Series)[] = [
   new Movie(
     "Harry Potter 1",
@@ -492,13 +489,13 @@ let amazonPrime = new StreamingService("Amazon Prime", amazonPrimeShows);
 
 let yeva = new User();
 
-//✅👍перевірка подписок()  для перевірки відкоментувати 19 , 494 , 495 рядок
+//✅👍перевірка підписок()  для перевірки відкоментувати 19 , 490 , 491 рядок
 yeva.subscribe(amazonPrime);
 // yeva.subscribe(netflix)
 // yeva.subscribe(megogo)
 // yeva.subscribe(megogo)//Повторна підписка
 
-//✅👍 перевірка watch() для перевірки відкоментувати 68 рядок
+//✅👍 перевірка watch() для перевірки відкоментувати 86 рядок
 // yeva.subscriptions.forEach((key) => {
 //   if (key.streamingService == amazonPrime) {
 //     key.watch("Free Guy"); // фільм що є в amazonPrime (повинен спрацювати)
@@ -522,7 +519,7 @@ yeva.subscribe(amazonPrime);
 //   }
 // })
 
-// ✅👍 перевірка addShow() для перевірки відкоментувати 67 рядок
+// ✅👍 перевірка addShow() для перевірки відкоментувати 110 рядок
 // yeva.subscriptions.forEach(key => {
 //   if (key.streamingService == amazonPrime) {
 //     key.streamingService.addShow(new Movie('Death on the Nile', ['mystery', 'crime', 'thriller', 'drama', 'foreign'], '2022', "200"))//додати фільм, якого немає в amazonPrime (треба додати)
@@ -551,7 +548,7 @@ yeva.subscribe(amazonPrime);
 //✅👍 перевірка getMostViewedShowsOfYear
 // yeva.subscriptions.forEach(key => {
 //   if (key.streamingService == amazonPrime) {
-//     console.log(key.streamingService.getMostViewedShowsOfYear("2012"))//нету фільмів з таким роком випуску (не повинен знайти)
+//     console.log(key.streamingService.getMostViewedShowsOfYear("2012"))//немає фільмів з таким роком випуску (не повинен знайти)
 //     console.log(key.streamingService.getMostViewedShowsOfYear("2022"))//є фільми з таким роком випуску (повинен знайти)
 //   }
 // })
@@ -560,6 +557,6 @@ yeva.subscribe(amazonPrime);
 // yeva.subscriptions.forEach(key => {
 //   if (key.streamingService == amazonPrime) {
 //     console.log(key.streamingService.getMostViewedShowsOfGenre("thriller"))//є фільми з таким роком випуску (повинен знайти)
-//     console.log(key.streamingService.getMostViewedShowsOfGenre("historical drama"))//нету фільмів з таким роком випуску (не повинен знайти)
+//     console.log(key.streamingService.getMostViewedShowsOfGenre("historical drama"))//немає фільмів з таким роком випуску (не повинен знайти)
 //   }
 // })
