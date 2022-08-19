@@ -51,7 +51,8 @@ yeva.subscribe(megogo)//Повторна підписка
 ![](./img/subscribe.png)
 
 # Subscription
-Watch()
+
+## Watch()
 ```JS
 yeva.subscriptions.forEach(key => {
   if (key.streamingService == amazonPrime) {
@@ -64,7 +65,7 @@ yeva.subscriptions.forEach(key => {
 ```
 ![](./img/watch.png)
 
-getRecommendationTrending()
+## getRecommendationTrending()
 ```JS
 yeva.subscriptions.forEach(key => {
   if (key.streamingService == amazonPrime) {
@@ -72,10 +73,9 @@ yeva.subscriptions.forEach(key => {
   }
 })
 ```
-
 ![](./img/getRecommendationTrending.png)
 
-getRecommendationByGenre()
+## getRecommendationByGenre()
 ```JS
 yeva.subscriptions.forEach(key => {
   if (key.streamingService == amazonPrime) {
@@ -87,7 +87,7 @@ yeva.subscriptions.forEach(key => {
 
 # StreamingService
 
-addShow()
+## addShow()
 ```JS
 yeva.subscriptions.forEach(key => {
   if (key.streamingService == amazonPrime) {
@@ -107,10 +107,9 @@ yeva.subscriptions.forEach(key => {
   }
 })
 ```
-
 ![](./img/addShow.png)
 
-getMostViewedShowsOfYear()
+## getMostViewedShowsOfYear()
 ```JS
 yeva.subscriptions.forEach(key => {
   if (key.streamingService == amazonPrime) {
@@ -121,7 +120,7 @@ yeva.subscriptions.forEach(key => {
 ```
 ![](./img/getMostViewedShowsOfYear.png)
 
-getMostViewedShowsOfGenre()
+## getMostViewedShowsOfGenre()
 ```JS
 yeva.subscriptions.forEach(key => {
   if (key.streamingService == amazonPrime) {
@@ -133,8 +132,8 @@ yeva.subscriptions.forEach(key => {
 ![](./img/getMostViewedShowsOfGenre.png)
 
 # Show
-getDuration()
 
+## getDuration()
 ```JS
 yeva.subscriptions.forEach(key => {
   if (key.streamingService == amazonPrime) {
